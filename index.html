@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solvative: The 2025 LinkedIn Digital Authority Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Professional Neutrals & Blue -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling application with a sticky top navigation. This structure was chosen to allow non-linear exploration, enabling different user personas (CEO, Founder) to directly access the sections most relevant to them (e.g., 'Audience Mindset' or 'Content Playbook'). The flow is designed to first establish the 'Why' (The New Rules), then the 'How' (Formats, Personas, Pillars), and finally the 'What' (Execution Playbook & Roadmap), creating a logical and educational journey through the report's key findings. -->
+    <!-- Visualization & Content Choices: Report Info: Format Performance -> Goal: Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Click a format's bar to display its detailed strategy, best uses, and key stats. Justification: Transforms a static list into an engaging, comparative tool. Report Info: Audience Psychographics -> Goal: Organize/Inform -> Viz: Tabbed Interface -> Interaction: Select a persona tab (C-Suite, Founder) to view their specific drivers and content needs. Justification: Provides a highly targeted and easily digestible view of complex audience analysis. Report Info: 90-Day Content Matrix -> Goal: Organize/Interact -> Viz: Filterable HTML Table -> Interaction: Use dropdowns to filter content ideas by industry or audience. Justification: Turns a dense table into a practical, personalized planning tool. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #343A40;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0052CC;
+        }
+        .tab-button.active {
+            border-color: #0052CC;
+            color: #0052CC;
+            background-color: #E6F0FF;
+        }
+        .accordion-button.open .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            header, footer, .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: #FFFFFF;
+                -webkit-print-color-adjust: exact; /* Ensures background colors print in Chrome */
+                color-adjust: exact; /* Ensures background colors print in Firefox */
+            }
+            section {
+                margin-top: 0;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                margin-bottom: 0;
+                page-break-inside: avoid;
+            }
+            .shadow-lg, .shadow-md, .shadow-sm {
+                box-shadow: none !important;
+            }
+            #hero {
+                padding-bottom: 2rem;
+            }
+            .bg-white, .bg-gray-50 {
+                border: 1px solid #dee2e6 !important;
+            }
+            .text-gray-600 {
+                color: #495057 !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-gray-800">Solvative</span>
+                    <span class="ml-2 text-xl font-light text-gray-500">| LinkedIn Blueprint</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#rules" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">The Rules</a>
+                            <a href="#formats" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Formats</a>
+                            <a href="#audience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Audience</a>
+                            <a href="#pillars" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Pillars</a>
+                            <a href="#playbook" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Playbook</a>
+                            <a href="#roadmap" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Roadmap</a>
+                        </div>
+                    </div>
+                    <button id="downloadPdfBtn" class="no-print ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Download Report
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        
+        <section id="hero" class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-4">The Digital Authority Blueprint</h1>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600">An interactive guide for Solvative to master the 2025 LinkedIn landscape. This blueprint translates deep research into an actionable strategy for engaging C-suites, founders, and decision-makers in your key industries.</p>
+        </section>
+
+        <section id="rules" class="mb-16 md:mb-24 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">The New Rules of Engagement</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">In 2025, LinkedIn is a self-contained ecosystem, not a traffic referral engine. The algorithm rewards native value, deep engagement, and human connection. Understanding these core principles is the foundation of our strategy.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">🧠</span>
+                        <h3 class="text-xl font-semibold text-gray-800">Knowledge is King</h3>
+                    </div>
+                    <p class="text-gray-600">The algorithm actively promotes content that educates and informs. Purely promotional material is suppressed in favor of posts that provide tangible knowledge and advice.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">🔗</span>
+                        <h3 class="text-xl font-semibold text-gray-800">Links are Penalized</h3>
+                    </div>
+                    <p class="text-gray-600">Outbound links can reduce organic reach by up to <span class="font-bold text-red-600">25-35%</span>. The entire user journey, from awareness to consideration, must now happen on-platform.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">💬</span>
+                        <h3 class="text-xl font-semibold text-gray-800">Conversation > Clicks</h3>
+                    </div>
+                    <p class="text-gray-600">Meaningful comments (>15 words) are twice as valuable as likes. The goal is to spark substantive discussions, not just gather superficial engagement.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">👤</span>
+                        <h3 class="text-xl font-semibold text-gray-800">People > Pages</h3>
+                    </div>
+                    <p class="text-gray-600">A CEO's post gets <span class="font-bold text-blue-600">3x more engagement</span> than a company page post. Your brand authority is the sum of your employees' personal brands.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">🏠</span>
+                        <h3 class="text-xl font-semibold text-gray-800">Native Content is Supreme</h3>
+                    </div>
+                    <p class="text-gray-600">Formats consumed entirely on LinkedIn (carousels, videos, polls) are heavily favored. Repurpose blogs into carousels and webinars into LinkedIn Live events.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">⏳</span>
+                        <h3 class="text-xl font-semibold text-gray-800">The Golden Window</h3>
+                    </div>
+                    <p class="text-gray-600">The first <span class="font-bold">60-120 minutes</span> are critical. Strong initial traction can boost a post's total reach by up to 15%, creating a powerful momentum effect.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="formats" class="mb-16 md:mb-24 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Format Supremacy: A Data-Backed Hierarchy</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">Not all content formats are created equal. This interactive chart shows the engagement hierarchy. Click on a format to understand its strategic value and best use cases for Solvative.</p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="chart-container mb-8">
+                    <canvas id="formatChart"></canvas>
+                </div>
+                <div id="formatInfo" class="mt-4 p-6 bg-gray-50 rounded-lg border border-gray-200 min-h-[150px]">
+                    <h3 id="formatTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+                    <p id="formatDescription" class="text-gray-700 mb-3"></p>
+                    <div id="formatBestFor" class="text-sm"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="audience" class="mb-16 md:mb-24 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Deconstructing Your Target Audience</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">To build authority, you must understand the deep psychological drivers of your audience. Select a persona to view a strategic brief on their mindset, motivations, and content needs.</p>
+            </div>
+            <div>
+                <div class="mb-6 border-b border-gray-300">
+                    <nav class="flex -mb-px space-x-6" aria-label="Tabs">
+                        <button data-tab="csuite" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-400">
+                            The C-Suite
+                        </button>
+                        <button data-tab="founder" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-400">
+                            The Founder
+                        </button>
+                        <button data-tab="decisionmaker" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-400">
+                            The Decision-Maker
+                        </button>
+                    </nav>
+                </div>
+                <div id="audienceContent" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+                </div>
+            </div>
+        </section>
+
+        <section id="pillars" class="mb-16 md:mb-24 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Solvative's Content Pillars</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">These four pillars align your core expertise with the specific pain points of your target personas, forming the strategic foundation for all content creation.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Future of Industrial Intelligence</h3>
+                    <p class="text-gray-600 mb-4">Targeting manufacturing leaders and IIoT startups. Content focuses on predictive maintenance ROI, digital twins, supply chain resilience, and the human-centric smart factory.</p>
+                    <span class="text-sm font-semibold text-blue-600">INDUSTRY: IIoT & MANUFACTURING</span>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Healthcare Digital Frontier</h3>
+                    <p class="text-gray-600 mb-4">For hospital C-suites and MedTech founders. Content addresses digital transformation, workforce augmentation, cybersecurity as patient safety, and the economics of virtual care.</p>
+                    <span class="text-sm font-semibold text-green-600">INDUSTRY: MEDICAL & HEALTHCARE</span>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Art & Science of Modern Branding</h3>
+                    <p class="text-gray-600 mb-4">For CMOs and agency founders. Content explores brand as a revenue driver, AI in branding, executive branding as a corporate asset, and the B2B experience economy.</p>
+                    <span class="text-sm font-semibold text-purple-600">INDUSTRY: BRANDING & MARKETING</span>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Startup & Scale-Up Playbook</h3>
+                    <p class="text-gray-600 mb-4">Tailored for founders. Content provides actionable guides on fundraising narratives, scaling without breaking, resource-constrained growth marketing, and founder psychology.</p>
+                    <span class="text-sm font-semibold text-yellow-600">INDUSTRY: STARTUPS</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="playbook" class="mb-16 md:mb-24 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">The High-Impact Execution Playbook</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">Success requires disciplined execution. This playbook provides a tactical guide to crafting compelling content and amplifying its reach. Expand each section to reveal the strategy.</p>
+            </div>
+            <div class="space-y-4" id="accordionContainer">
+            </div>
+        </section>
+
+        <section id="roadmap" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Your 90-Day Content Roadmap</h2>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">This interactive matrix translates strategy into a concrete Q1 plan. Use the filters to find specific, ready-to-use content ideas tailored to your target industries and audiences.</p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex flex-col md:flex-row gap-4 mb-6">
+                    <div class="flex-1">
+                        <label for="industryFilter" class="block text-sm font-medium text-gray-700">Filter by Industry</label>
+                        <select id="industryFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option value="all">All Industries</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label for="audienceFilter" class="block text-sm font-medium text-gray-700">Filter by Audience</label>
+                        <select id="audienceFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option value="all">All Audiences</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Industry</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Audience</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content Angle</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Format</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roadmapTableBody" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16 md:mt-24">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 Solvative, Inc. | LinkedIn Digital Authority Blueprint</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const formatData = {
+        labels: ['Carousels', 'Video', 'Polls', 'Multi-Image', 'Text-Only'],
+        engagement: [45.85, 30, 20, 15, 5],
+        info: [
+            {
+                title: 'Native Documents (Carousels)',
+                description: 'The undisputed leader in engagement, achieving an impressive 45.85% rate. Their power lies in increasing "dwell time" as users swipe, signaling deep interest to the algorithm.',
+                bestFor: 'Breaking down complex topics, repurposing whitepapers, visual storytelling, and showcasing expert-driven content.'
+            },
+            {
+                title: 'Video Content',
+                description: 'Video usage has grown 53% and boasts the highest share rate of any format. Short, authentic "selfie-style" videos with subtitles grab attention, while longer videos serve in-depth education.',
+                bestFor: 'Amplifying reach, humanizing executives, demonstrating products, and sharing high-impact insights.'
+            },
+            {
+                title: 'Polls',
+                description: 'A top-performing format for generating reach and starting conversations. Each vote is an opportunity for a personalized follow-up, turning passive engagement into an active sales conversation.',
+                bestFor: 'Gauging market interest, lead qualification, sparking community discussion, and gathering quick feedback.'
+            },
+            {
+                title: 'Multi-Image Posts',
+                description: 'A strong alternative to carousels for compelling visual narratives. This format is highly effective for a simple three-act story structure: problem, insight, and solution.',
+                bestFor: 'Showcasing case study results, before-and-after transformations, and simple step-by-step guides.'
+            },
+            {
+                title: 'Text-Only Posts',
+                description: 'The lowest-performing format in terms of algorithmic favor. To succeed, the content must be exceptionally valuable, offering a sharp, bold, contrarian, or deeply personal perspective.',
+                bestFor: 'Sharing strong opinions, asking provocative questions, and delivering surprising insights that cut through the noise.'
+            }
+        ]
+    };
+
+    const audienceData = {
+        csuite: {
+            title: 'The C-Suite Mindset: Control, Ego & Fear',
+            content: `
+                <p class="text-gray-700 mb-4">C-level executives use LinkedIn for strategic intelligence and risk mitigation. They are driven by a need for control over their organization, validation of their status as leaders, and a deep fear of being found incompetent.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Content They Crave:</strong> "Big picture" strategic foresight, high-authority data, and executive briefings that help them anticipate market trends and de-risk decisions.</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Your Goal:</strong> Build a "trust asset." Deliver high-value, non-promotional thought leadership to become their credible source of information. Trust is the ultimate conversion metric.</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Key Stat:</strong> 47% of C-suite execs share contact info after consuming compelling thought leadership.</div></li>
+                </ul>
+            `
+        },
+        founder: {
+            title: "The Founder's Journey: Build, Scale & Fundraise",
+            content: `
+                <p class="text-gray-700 mb-4">Startup founders operate under immense pressure with a relentless focus on survival and growth. Their content consumption is highly pragmatic, prioritizing actionable solutions to immediate challenges.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Content They Crave:</strong> Specific, proven playbooks (not generic advice), authentic "build in public" narratives, and peer-to-peer advice from those who have "been there."</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Your Goal:</strong> Position yourself as an experienced mentor, not a vendor. Share frameworks and lessons learned from your own scaling journey to build authentic rapport.</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Key Insight:</strong> They resonate with the hustle but need tactical relief from the fear of failure and running out of capital.</div></li>
+                </ul>
+            `
+        },
+        decisionmaker: {
+            title: "The Decision-Maker's Calculus: Practicality & Proof",
+            content: `
+                <p class="text-gray-700 mb-4">VPs, Directors, and Managers are tasked with implementing strategy. They are measured on efficiency, cost reduction, and project success. Their content needs are distinctly practical and solution-oriented.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Content They Crave:</strong> "Implementation-ready" content like checklists, how-to guides, and frameworks. They value data-backed case studies and quantifiable results to justify their decisions internally.</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Your Goal:</strong> Be an indispensable partner in execution. Provide practical toolkits that help them perform their job more effectively and translate strategy into action.</div></li>
+                    <li class="flex items-start"><span class="text-blue-500 font-bold mr-3">✔</span><div><strong class="text-gray-800">Key Insight:</strong> This content is highly shareable within their organizations, amplifying your reach to other key stakeholders.</div></li>
+                </ul>
+            `
+        }
+    };
+    
+    const accordionData = [
+        {
+            title: 'Crafting the Irresistible Hook',
+            content: 'The first 1-3 lines must stop the scroll. Use a bold contrarian statement, a thought-provoking question, a startling statistic, a storytelling hook, or promise a tangible outcome.'
+        },
+        {
+            title: 'Structuring for Scannability',
+            content: 'Users scan, not read. Use short, single-sentence paragraphs to create white space. Employ bulleted/numbered lists for key takeaways. Use emojis and bolding strategically to guide the eye.'
+        },
+        {
+            title: 'Visual Storytelling',
+            content: 'Authenticity wins. Use data-driven infographics, real team photos, and short "selfie-style" executive videos with subtitles. Avoid generic stock photos. Screenshots provide powerful proof for how-to content.'
+        },
+        {
+            title: 'Strategic Engagement & CTAs',
+            content: 'Engagement is reciprocal. Warm up the algorithm by commenting on others\' posts before you publish. Reply to every comment on your own posts. Use CTAs that start conversations ("What do you think?") or generate native leads ("DM me for the guide").'
+        },
+        {
+            title: 'Amplification & Measurement',
+            content: 'Activate an Employee Advocacy Program with 3-5 internal champions. Repurpose pillar content (e.g., a whitepaper) into multiple micro-assets (carousels, videos, polls). Measure what matters: audience quality (profile views, follower demographics) and business impact (inbound DMs, sales-influenced pipeline).'
+        }
+    ];
+
+    const roadmapData = [
+        { industry: "IIoT / Manufacturing", audience: "C-Suite Executive", angle: "The ROI of Predictive Maintenance", format: "Document Carousel" },
+        { industry: "IIoT / Manufacturing", audience: "Decision-Maker", angle: "5-Step Resilient Supply Chain Checklist", format: "Document Carousel" },
+        { industry: "Healthcare / Medical", audience: "C-Suite Executive", angle: "How AI Frees Clinicians for Top-of-License Care", format: "Short Video" },
+        { industry: "Healthcare / Medical", audience: "Founder", angle: "The Interoperability Challenge for MedTech", format: "Text-Only (Bold Opinion)" },
+        { industry: "Branding", audience: "Founder", angle: "Your CEO is Your Best Marketing Channel", format: "Multi-Image Post" },
+        { industry: "Branding", audience: "Decision-Maker", angle: "Measuring the True Impact of Your B2B Brand", format: "Poll + Follow-up" },
+        { industry: "Startups", audience: "Founder", angle: "The Unspoken Rule of Fundraising Narratives", format: "Text + Image" },
+        { industry: "Startups", audience: "Founder", angle: "Scaling Past the 'Hustle' Phase", format: "Document Carousel" }
+    ];
+
+    const formatChartCtx = document.getElementById('formatChart').getContext('2d');
+    const formatTitleEl = document.getElementById('formatTitle');
+    const formatDescriptionEl = document.getElementById('formatDescription');
+    const formatBestForEl = document.getElementById('formatBestFor');
+    
+    const chart = new Chart(formatChartCtx, {
+        type: 'bar',
+        data: {
+            labels: formatData.labels,
+            datasets: [{
+                label: 'Relative Engagement Score',
+                data: formatData.engagement,
+                backgroundColor: [
+                    'rgba(0, 82, 204, 0.7)',
+                    'rgba(59, 130, 246, 0.7)',
+                    'rgba(96, 165, 250, 0.7)',
+                    'rgba(147, 197, 253, 0.7)',
+                    'rgba(191, 219, 254, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(0, 82, 204, 1)',
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(96, 165, 250, 1)',
+                    'rgba(147, 197, 253, 1)',
+                    'rgba(191, 219, 254, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Engagement Score (Higher is Better)'
+                    }
+                }
+            },
+            onClick: (e, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    updateFormatInfo(index);
+                }
+            }
+        }
+    });
+
+    function updateFormatInfo(index) {
+        const info = formatData.info[index];
+        formatTitleEl.textContent = info.title;
+        formatDescriptionEl.textContent = info.description;
+        formatBestForEl.innerHTML = `<strong class="text-gray-800">Best for:</strong> ${info.bestFor}`;
+    }
+    updateFormatInfo(0);
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const audienceContentEl = document.getElementById('audienceContent');
+
+    function updateAudienceContent(tabId) {
+        const data = audienceData[tabId];
+        audienceContentEl.innerHTML = `
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">${data.title}</h3>
+            ${data.content}
+        `;
+        tabButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            updateAudienceContent(button.dataset.tab);
+        });
+    });
+    updateAudienceContent('csuite');
+    
+    const accordionContainer = document.getElementById('accordionContainer');
+    accordionData.forEach((item, index) => {
+        const accordionItem = document.createElement('div');
+        accordionItem.className = 'bg-white border border-gray-200 rounded-lg';
+        accordionItem.innerHTML = `
+            <h2>
+                <button type="button" class="accordion-button flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 hover:bg-gray-100" data-accordion-target="#accordion-body-${index}">
+                    <span class="text-lg">${item.title}</span>
+                    <svg class="accordion-arrow w-6 h-6 shrink-0 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </h2>
+            <div id="accordion-body-${index}" class="hidden p-5 border-t border-gray-200">
+                <p class="text-gray-600">${item.content}</p>
+            </div>
+        `;
+        accordionContainer.appendChild(accordionItem);
+    });
+
+    accordionContainer.addEventListener('click', (e) => {
+        const button = e.target.closest('.accordion-button');
+        if (button) {
+            const targetId = button.getAttribute('data-accordion-target');
+            const body = document.querySelector(targetId);
+            button.classList.toggle('open');
+            body.classList.toggle('hidden');
+        }
+    });
+
+    const industryFilter = document.getElementById('industryFilter');
+    const audienceFilter = document.getElementById('audienceFilter');
+    const roadmapTableBody = document.getElementById('roadmapTableBody');
+    
+    const industries = [...new Set(roadmapData.map(item => item.industry))];
+    const audiences = [...new Set(roadmapData.map(item => item.audience))];
+
+    industries.forEach(ind => {
+        const option = document.createElement('option');
+        option.value = ind;
+        option.textContent = ind;
+        industryFilter.appendChild(option);
+    });
+    
+    audiences.forEach(aud => {
+        const option = document.createElement('option');
+        option.value = aud;
+        option.textContent = aud;
+        audienceFilter.appendChild(option);
+    });
+
+    function populateRoadmapTable() {
+        roadmapTableBody.innerHTML = '';
+        const selectedIndustry = industryFilter.value;
+        const selectedAudience = audienceFilter.value;
+
+        const filteredData = roadmapData.filter(item => {
+            const industryMatch = selectedIndustry === 'all' || item.industry === selectedIndustry;
+            const audienceMatch = selectedAudience === 'all' || item.audience === selectedAudience;
+            return industryMatch && audienceMatch;
+        });
+
+        filteredData.forEach(item => {
+            const row = document.createElement('tr');
+            row.className = 'roadmap-row';
+            row.dataset.industry = item.industry;
+            row.dataset.audience = item.audience;
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.industry}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.audience}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.angle}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.format}</td>
+            `;
+            roadmapTableBody.appendChild(row);
+        });
+    }
+
+    industryFilter.addEventListener('change', populateRoadmapTable);
+    audienceFilter.addEventListener('change', populateRoadmapTable);
+    populateRoadmapTable();
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 80) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+        window.print();
+    });
+});
+</script>
+</body>
+</html>

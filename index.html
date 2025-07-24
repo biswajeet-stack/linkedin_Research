@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Professional Neutrals & Blue -->
-    <!-- Application Structure Plan: A single-page, vertical-scrolling application with a sticky top navigation. This structure was chosen to allow non-linear exploration, enabling different user personas (CEO, Founder) to directly access the sections most relevant to them (e.g., 'Audience Mindset' or 'Content Playbook'). The flow is designed to first establish the 'Why' (The New Rules), then the 'How' (Formats, Personas, Pillars), and finally the 'What' (Execution Playbook & Roadmap), creating a logical and educational journey through the report's key findings. -->
-    <!-- Visualization & Content Choices: Report Info: Format Performance -> Goal: Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Click a format's bar to display its detailed strategy, best uses, and key stats. Justification: Transforms a static list into an engaging, comparative tool. Report Info: Audience Psychographics -> Goal: Organize/Inform -> Viz: Tabbed Interface -> Interaction: Select a persona tab (C-Suite, Founder) to view their specific drivers and content needs. Justification: Provides a highly targeted and easily digestible view of complex audience analysis. Report Info: 90-Day Content Matrix -> Goal: Organize/Interact -> Viz: Filterable HTML Table -> Interaction: Use dropdowns to filter content ideas by industry or audience. Justification: Turns a dense table into a practical, personalized planning tool. -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling application with a sticky top navigation. This structure was chosen to allow non-linear exploration, enabling different user personas (CEO, Founder) to directly access the sections most relevant to them (e.g., 'Audience Mindset' or 'Content Playbook'). The flow is designed to first establish the 'Why' (The Rules), then the 'How' (Formats, Personas, Pillars), and finally the 'What' (Execution Playbook), creating a logical and educational journey through the report's key findings. -->
+    <!-- Visualization & Content Choices: Report Info: Format Performance -> Goal: Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Click a format's bar to display its detailed strategy, best uses, and key stats. Justification: Transforms a static list into an engaging, comparative tool. Report Info: Audience Psychographics -> Goal: Organize/Inform -> Viz: Tabbed Interface -> Interaction: Select a persona tab (C-Suite, Founder) to view their specific drivers and content needs. Justification: Provides a highly targeted and easily digestible view of complex audience analysis. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -97,7 +97,6 @@
                             <a href="#audience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Audience</a>
                             <a href="#pillars" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Pillars</a>
                             <a href="#playbook" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Playbook</a>
-                            <a href="#roadmap" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Roadmap</a>
                         </div>
                     </div>
                     <button id="downloadPdfBtn" class="no-print ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -244,43 +243,7 @@
             <div class="space-y-4" id="accordionContainer">
             </div>
         </section>
-
-        <section id="roadmap" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Your 90-Day Content Roadmap</h2>
-                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">This interactive matrix translates strategy into a concrete Q1 plan. Use the filters to find specific, ready-to-use content ideas tailored to your target industries and audiences.</p>
-            </div>
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
-                <div class="flex flex-col md:flex-row gap-4 mb-6">
-                    <div class="flex-1">
-                        <label for="industryFilter" class="block text-sm font-medium text-gray-700">Filter by Industry</label>
-                        <select id="industryFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                            <option value="all">All Industries</option>
-                        </select>
-                    </div>
-                    <div class="flex-1">
-                        <label for="audienceFilter" class="block text-sm font-medium text-gray-700">Filter by Audience</label>
-                        <select id="audienceFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                            <option value="all">All Audiences</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Industry</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Audience</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content Angle</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Format</th>
-                            </tr>
-                        </thead>
-                        <tbody id="roadmapTableBody" class="bg-white divide-y divide-gray-200">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+        
     </main>
 
     <footer class="bg-gray-800 text-white mt-16 md:mt-24">
@@ -373,6 +336,10 @@ document.addEventListener('DOMContentLoaded', function () {
             content: 'Authenticity wins. Use data-driven infographics, real team photos, and short "selfie-style" executive videos with subtitles. Avoid generic stock photos. Screenshots provide powerful proof for how-to content.'
         },
         {
+            title: 'Optimal Posting Cadence (US Audience)',
+            content: 'To maximize reach and engagement with a US-based professional audience, timing is crucial. Post during their workweek when they are most active. <br><br><b>Best Days:</b> Tuesday, Wednesday, and Thursday.<br><b>Best Times (Eastern Time):</b> Aim for 9-11 AM ET. This single time slot effectively covers the morning for the East Coast, mid-day for Central, and the early morning start for the West Coast, capturing the largest number of professionals online.'
+        },
+        {
             title: 'Strategic Engagement & CTAs',
             content: 'Engagement is reciprocal. Warm up the algorithm by commenting on others\' posts before you publish. Reply to every comment on your own posts. Use CTAs that start conversations ("What do you think?") or generate native leads ("DM me for the guide").'
         },
@@ -380,17 +347,6 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Amplification & Measurement',
             content: 'Activate an Employee Advocacy Program with 3-5 internal champions. Repurpose pillar content (e.g., a whitepaper) into multiple micro-assets (carousels, videos, polls). Measure what matters: audience quality (profile views, follower demographics) and business impact (inbound DMs, sales-influenced pipeline).'
         }
-    ];
-
-    const roadmapData = [
-        { industry: "IIoT / Manufacturing", audience: "C-Suite Executive", angle: "The ROI of Predictive Maintenance", format: "Document Carousel" },
-        { industry: "IIoT / Manufacturing", audience: "Decision-Maker", angle: "5-Step Resilient Supply Chain Checklist", format: "Document Carousel" },
-        { industry: "Healthcare / Medical", audience: "C-Suite Executive", angle: "How AI Frees Clinicians for Top-of-License Care", format: "Short Video" },
-        { industry: "Healthcare / Medical", audience: "Founder", angle: "The Interoperability Challenge for MedTech", format: "Text-Only (Bold Opinion)" },
-        { industry: "Branding", audience: "Founder", angle: "Your CEO is Your Best Marketing Channel", format: "Multi-Image Post" },
-        { industry: "Branding", audience: "Decision-Maker", angle: "Measuring the True Impact of Your B2B Brand", format: "Poll + Follow-up" },
-        { industry: "Startups", audience: "Founder", angle: "The Unspoken Rule of Fundraising Narratives", format: "Text + Image" },
-        { industry: "Startups", audience: "Founder", angle: "Scaling Past the 'Hustle' Phase", format: "Document Carousel" }
     ];
 
     const formatChartCtx = document.getElementById('formatChart').getContext('2d');
@@ -508,57 +464,6 @@ document.addEventListener('DOMContentLoaded', function () {
             body.classList.toggle('hidden');
         }
     });
-
-    const industryFilter = document.getElementById('industryFilter');
-    const audienceFilter = document.getElementById('audienceFilter');
-    const roadmapTableBody = document.getElementById('roadmapTableBody');
-    
-    const industries = [...new Set(roadmapData.map(item => item.industry))];
-    const audiences = [...new Set(roadmapData.map(item => item.audience))];
-
-    industries.forEach(ind => {
-        const option = document.createElement('option');
-        option.value = ind;
-        option.textContent = ind;
-        industryFilter.appendChild(option);
-    });
-    
-    audiences.forEach(aud => {
-        const option = document.createElement('option');
-        option.value = aud;
-        option.textContent = aud;
-        audienceFilter.appendChild(option);
-    });
-
-    function populateRoadmapTable() {
-        roadmapTableBody.innerHTML = '';
-        const selectedIndustry = industryFilter.value;
-        const selectedAudience = audienceFilter.value;
-
-        const filteredData = roadmapData.filter(item => {
-            const industryMatch = selectedIndustry === 'all' || item.industry === selectedIndustry;
-            const audienceMatch = selectedAudience === 'all' || item.audience === selectedAudience;
-            return industryMatch && audienceMatch;
-        });
-
-        filteredData.forEach(item => {
-            const row = document.createElement('tr');
-            row.className = 'roadmap-row';
-            row.dataset.industry = item.industry;
-            row.dataset.audience = item.audience;
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.industry}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.audience}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.angle}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.format}</td>
-            `;
-            roadmapTableBody.appendChild(row);
-        });
-    }
-
-    industryFilter.addEventListener('change', populateRoadmapTable);
-    audienceFilter.addEventListener('change', populateRoadmapTable);
-    populateRoadmapTable();
 
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
